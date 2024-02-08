@@ -34,8 +34,6 @@ This is a Django project developed using Python, Django, Django templates, Postg
 
 ## Deployment
 
-The project is deployed and accessible at https://markit-illf.onrender.com
-
 ```bash
   git clone https://github.com/SanjanaAyshi/Task_Manager
   cd hotel-booking-website
