@@ -29,7 +29,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://markit-illf.onrender.com', 'https://*.127.0.0.1']
 
 # #cors fix
 # CORS_ORIGIN_ALLOW_ALL = True
