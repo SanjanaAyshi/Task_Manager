@@ -1,0 +1,87 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container text-center mt-lg-2">
+  <h3 style="font-family: 'Noto Sans Adlam', sans-serif; color: #3a51ff;">
+    {{ request.user.first_name }} {{ request.user.last_name }}, History:
+  </h3>
+</div>
+<div class="container mt-lg-3">
+  {% if incomplete_tasks %}
+  <h4>Incomplete Tasks:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in incomplete_tasks %}
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.due_date }}</td>
+        <td>
+          {% if task.priority == 'high' %}
+            <button class="btn btn-danger rounded-3">{{ task.priority }}</button>
+          {% elif task.priority == 'medium' %}
+            <button class="btn btn-warning rounded-3">{{ task.priority }}</button>
+          {% else %}
+            <button class="btn btn-success rounded-3">{{ task.priority }}</button>
+          {% endif %}
+        </td>
+        <td>
+            <a class="btn btn-primary text-white" href="{% url 'cancel_task' task.id %}">Cancel</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  {% if complete_tasks %}
+  <h4>Complete Tasks:</h4>
+  <table class="table pt-5">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in complete_tasks %}
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.due_date }}</td>
+        <td>
+          {% if task.priority == 'High' %}
+            <button class="btn btn-danger rounded-3">{{ task.priority }}</button>
+          {% elif task.priority == 'Medium' %}
+            <button class="btn btn-warning rounded-3">{{ task.priority }}</button>
+          {% else %}
+            <button class="btn btn-success rounded-3">{{ task.priority }}</button>
+          {% endif %}
+        </td>
+        <td>
+          <a class="btn btn-success text-white" href="">Good to go</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  {% if not incomplete_tasks and not complete_tasks %}
+  <h4 style="color: rgb(0, 135, 135)">Sorry!! No tasks...</h4>
+  {% endif %}
+</div>
+{% endblock %}
